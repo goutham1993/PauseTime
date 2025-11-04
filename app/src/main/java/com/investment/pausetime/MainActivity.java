@@ -1,11 +1,13 @@
 package com.investment.pausetime;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.LinearLayout;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements MonitoredAppAdapt
     private LinearLayout welcomeLayout;
     private LinearLayout contentLayout;
     private RecyclerView recyclerView;
+    private boolean permissionDialogShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,15 @@ public class MainActivity extends AppCompatActivity implements MonitoredAppAdapt
     @Override
     protected void onResume() {
         super.onResume();
+        // Only reset permission dialog flag if permissions are still missing
+        // This allows re-checking when returning from settings
+        if (hasOverlayPermission() && isAccessibilityServiceEnabled()) {
+            // Permissions are granted, don't show dialog again
+            permissionDialogShown = true;
+        } else {
+            // Permissions are missing, allow showing dialog again if needed
+            permissionDialogShown = false;
+        }
         // Reload apps when returning from other activities
         loadMonitoredApps();
     }
@@ -91,8 +103,9 @@ public class MainActivity extends AppCompatActivity implements MonitoredAppAdapt
     }
     
     private void checkPermissionsForMonitoredApps() {
-        // Only show permission reminder if we have monitored apps but missing permissions
-        if (!hasOverlayPermission() || !isAccessibilityServiceEnabled()) {
+        // Only show permission reminder once per session if we have monitored apps but missing permissions
+        if (!permissionDialogShown && (!hasOverlayPermission() || !isAccessibilityServiceEnabled())) {
+            permissionDialogShown = true;
             Snackbar.make(binding.getRoot(), 
                     "Permissions needed for PauseTime to work", 
                     Snackbar.LENGTH_LONG)
@@ -125,6 +138,21 @@ public class MainActivity extends AppCompatActivity implements MonitoredAppAdapt
     }
 
     private boolean isAccessibilityServiceEnabled() {
+        // Use AccessibilityManager for more reliable detection
+        AccessibilityManager accessibilityManager = (AccessibilityManager) getSystemService(ACCESSIBILITY_SERVICE);
+        if (accessibilityManager != null) {
+            List<AccessibilityServiceInfo> enabledServices = accessibilityManager.getEnabledAccessibilityServiceList(
+                    AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+            String serviceId = getPackageName() + "/com.investment.pausetime.service.AppMonitoringService";
+            for (AccessibilityServiceInfo serviceInfo : enabledServices) {
+                String id = serviceInfo.getId();
+                if (id != null && id.equals(serviceId)) {
+                    return true;
+                }
+            }
+        }
+        
+        // Fallback to Settings check
         String service = getPackageName() + "/" + 
                 "com.investment.pausetime.service.AppMonitoringService";
         try {

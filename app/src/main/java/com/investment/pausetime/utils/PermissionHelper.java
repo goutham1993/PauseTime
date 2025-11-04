@@ -1,8 +1,12 @@
 package com.investment.pausetime.utils;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
+
+import java.util.List;
 
 public class PermissionHelper {
 
@@ -14,6 +18,21 @@ public class PermissionHelper {
     }
 
     public static boolean isAccessibilityServiceEnabled(Context context) {
+        // Use AccessibilityManager for more reliable detection
+        AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+        if (accessibilityManager != null) {
+            List<AccessibilityServiceInfo> enabledServices = accessibilityManager.getEnabledAccessibilityServiceList(
+                    AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+            String serviceId = context.getPackageName() + "/com.investment.pausetime.service.AppMonitoringService";
+            for (AccessibilityServiceInfo serviceInfo : enabledServices) {
+                String id = serviceInfo.getId();
+                if (id != null && id.equals(serviceId)) {
+                    return true;
+                }
+            }
+        }
+        
+        // Fallback to Settings check
         String service = context.getPackageName() + "/" + 
                 "com.investment.pausetime.service.AppMonitoringService";
         try {
