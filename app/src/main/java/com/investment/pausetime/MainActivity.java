@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements MonitoredAppAdapt
         if (!permissionDialogShown && (!hasOverlayPermission() || !isAccessibilityServiceEnabled())) {
             permissionDialogShown = true;
             Snackbar.make(binding.getRoot(), 
-                    "Permissions needed for PauseTime to work", 
+                    "Permissions needed for Reclaim to work", 
                     Snackbar.LENGTH_LONG)
                     .setAction("Enable", v -> {
                         if (!hasOverlayPermission()) {
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements MonitoredAppAdapt
     private void showOverlayPermissionDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Overlay Permission Required")
-                .setMessage("PauseTime needs permission to draw over other apps to show the delay screen.")
+                .setMessage("Reclaim needs permission to draw over other apps to show the delay screen.")
                 .setPositiveButton("Grant Permission", (dialog, which) -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements MonitoredAppAdapt
     private void showAccessibilityPermissionDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Accessibility Service Required")
-                .setMessage("PauseTime needs accessibility service enabled to detect when monitored apps are opened.\n\nPlease enable 'PauseTime' in Accessibility settings.")
+                .setMessage("Reclaim needs accessibility service enabled to detect when monitored apps are opened.\n\nPlease enable 'Reclaim' in Accessibility settings.")
                 .setPositiveButton("Open Settings", (dialog, which) -> {
                     Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                     startActivity(intent);

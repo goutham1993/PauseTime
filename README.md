@@ -1,6 +1,6 @@
-# PauseTime - Mindful App Usage
+# Reclaim - Mindful App Usage
 
-PauseTime helps promote mindful app usage by adding a customizable delay when opening selected apps. This creates a moment of pause before accessing potentially distracting applications.
+Reclaim helps promote mindful app usage by adding a customizable delay when opening selected apps. This creates a moment of pause before accessing potentially distracting applications.
 
 ## Features
 
@@ -24,12 +24,12 @@ PauseTime helps promote mindful app usage by adding a customizable delay when op
 ### 1. Draw Over Other Apps (Overlay Permission)
 - **Purpose**: Display the delay screen over other apps
 - **Requested**: On first FAB click
-- **Grant**: Settings → Apps → PauseTime → Display over other apps
+- **Grant**: Settings → Apps → Reclaim → Display over other apps
 
 ### 2. Accessibility Service
 - **Purpose**: Detect when monitored apps are opened
 - **Requested**: On first FAB click
-- **Grant**: Settings → Accessibility → PauseTime → Enable
+- **Grant**: Settings → Accessibility → Reclaim → Enable
 
 ### 3. Query All Packages
 - **Purpose**: List all installed apps for selection
@@ -39,7 +39,7 @@ PauseTime helps promote mindful app usage by adding a customizable delay when op
 
 ### Adding Apps to Monitor
 
-1. Open PauseTime
+1. Open Reclaim
 2. Tap the **+** (FAB) button
 3. Grant permissions if prompted
 4. Select apps from the list
@@ -119,26 +119,26 @@ User enters the app
 
 **Step 1: Verify Permissions**
 
-1. Open PauseTime app
+1. Open Reclaim app
 2. Check if you see "Please enable required permissions" message
 3. If yes, follow the prompts to grant both permissions
 
 **Step 2: Check Accessibility Service**
 
 1. Go to Android Settings → Accessibility
-2. Find "PauseTime" in the list
+2. Find "Reclaim" in the list
 3. Make sure it's **turned ON**
 4. If it was off, turn it ON and try again
 
 **Step 3: Check Overlay Permission**
 
-1. Go to Android Settings → Apps → PauseTime
+1. Go to Android Settings → Apps → Reclaim
 2. Tap "Display over other apps" or "Appear on top"
 3. Make sure permission is **allowed**
 
 **Step 4: Check Monitored Apps**
 
-1. Open PauseTime
+1. Open Reclaim
 2. Verify your apps are listed on the main screen
 3. If not, tap + button and select apps again
 
@@ -158,7 +158,7 @@ Try monitoring a simple app like Chrome first to verify it works.
 
 **Step 7: Restart Accessibility Service**
 
-1. Go to Settings → Accessibility → PauseTime
+1. Go to Settings → Accessibility → Reclaim
 2. Turn OFF
 3. Wait 5 seconds
 4. Turn ON
@@ -167,7 +167,7 @@ Try monitoring a simple app like Chrome first to verify it works.
 ### Service Stops Working
 
 1. Check battery optimization settings
-2. Disable battery optimization for PauseTime
+2. Disable battery optimization for Reclaim
 3. Re-enable accessibility service
 4. Restart device
 
@@ -177,7 +177,7 @@ The app now shows all launchable apps. If some apps are still missing, they migh
 
 ### Common Issues
 
-**"PauseTime has stopped"**
+**"Reclaim has stopped"**
 - Check Android version compatibility (requires Android 7.0+)
 - Review error logs in Logcat
 

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">PauseTime</string>
+    <string name="app_name">Reclaim</string>
     <string name="action_settings">Settings</string>
     
-    <!-- PauseTime specific strings -->
-    <string name="accessibility_service_description">PauseTime uses this service to detect when you open monitored apps and show a delay screen to promote mindful usage.</string>
+    <!-- Reclaim specific strings -->
+    <string name="accessibility_service_description">Reclaim uses this service to detect when you open monitored apps and show a delay screen to promote mindful usage.</string>
 </resources>

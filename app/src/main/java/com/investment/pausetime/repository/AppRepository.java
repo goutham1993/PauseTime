@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppRepository {
-    private static final String PREFS_NAME = "PauseTimePrefs";
+    private static final String PREFS_NAME = "ReclaimPrefs";
     private static final String KEY_MONITORED_APPS = "monitored_apps";
     
     private final SharedPreferences sharedPreferences;

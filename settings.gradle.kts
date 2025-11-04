@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PauseTime"
+rootProject.name = "Reclaim"
 include(":app")
  
